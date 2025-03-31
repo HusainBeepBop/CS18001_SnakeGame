@@ -1,20 +1,24 @@
 import pygame
-from tkinter as *
+from tkinter import *
 import tkinter as tk
-from tkinter import ttk
+from PIL import ImageTk, Image
 
-root=tk.Tk
-root.geometry('5000x5000')
+root=tk.Tk()
+root.geometry('500x500')
 root.title("Snake Game")
-Lframe=Frame(root)
-Gframe=Frame(root)
+Lframe=tk.Frame(root, height=100)
+Gframe=tk.Frame(root)
 Lframe.pack()
 
-single=Tk.Button(Lframe, Text="Single Player", bg='Orange', font='Chewy 40', height=3)
-single.pack()
+im1=ImageTk.PhotoImage(Image.open("C:\Users\Lenovo\Downloads\HD-wallpaper-classic-snake-adventures-snake-game.jpg"))
+im1_label = Label(Lframe, image=im1)
+im1_label.pack()
+ 
+single=tk.Button(Lframe, text="Single Player", bg='Orange', font='Chewy 40', height=2)
+single.grid(row=5, column=5)
 
-multi=Tk.Button(Lframe, Text="Multi Player", bg='Blue', font='Chewy 40', height=3)
-multi.pack()
+multi=tk.Button(Lframe, text="Multi Player", bg='Blue', font='Chewy 40', height=2)
+multi.grid(row=6, column=5)
 
 root.mainloop()
 pygame.init()
