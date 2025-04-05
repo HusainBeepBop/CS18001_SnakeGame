@@ -3,8 +3,12 @@ from tkinter import *
 import tkinter as tk
 from PIL import ImageTk, Image
 
-root=tk.Tk()
-root.geometry('500x500')
+root = tk.Tk()
+
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+root.attributes('-fullscreen', True)
 root.title("Snake Game")
 Lframe=tk.Frame(root, height=100)
 Gframe=tk.Frame(root)
