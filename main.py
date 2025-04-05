@@ -8,6 +8,9 @@ root.title("Snake Game")
 root.attributes('-fullscreen', True)
 root.configure(bg="#181818")
 
+vp_width = root.winfo_screenwidth()
+vp_height = root.winfo_screenheight()
+
 des_section = tk.Frame(root, borderwidth=2, relief="groove")
 des_section.pack(side=tk.LEFT, fill=tk.Y, padx=10, pady=10)
 des_section.configure(bg="#1f1f1f")
