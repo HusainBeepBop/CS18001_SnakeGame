@@ -58,14 +58,15 @@ main_area = tk.Frame(content_section)
 main_area.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
 
 start_game = tk.Frame(main_area)
-start_game.configure(width=500, height=1000)
-start_game.pack(anchor=tk.CENTER, expand=True)
+start_game.configure( height=100)
+start_game.pack(side=BOTTOM, fill=tk.X)
+start_game.pack_propagate(False)
 
-single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised")
-single_player.pack(fill=tk.BOTH, expand=True)
+single_player = tk.Button(start_game, width=100, height=100, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised")
+single_player.pack(side=LEFT, pady=(0, 5), fill=tk.X)
 
-dual_player = tk.Button(start_game, text="Dual Player", bg="#181818", fg="#f0f0f0", relief="raised")
-dual_player.pack(fill=tk.BOTH, expand=True)
+dual_player = tk.Button(start_game, width=100, height=100, text="Dual Player", bg="#181818", fg="#f0f0f0", relief="raised")
+dual_player.pack(side=RIGHT, pady=(0, 5), fill=tk.X)
 
 root.mainloop()
 pygame.init()
