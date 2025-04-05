@@ -14,14 +14,22 @@ max_frame_height = int(screen_height * 0.9)
 root.attributes('-fullscreen', True)
 root.title("Snake Game")
 
-home=tk.Frame(root, height=max_frame_height, width=max_frame_width)
+max_screen_width = 1366
+max_screen_height = 768
+
+frame_width = min(max_frame_width, max_screen_width)
+frame_height = min(max_frame_height, max_screen_height)
+
+home = tk.Frame(root, height=frame_height, width=frame_width)
 Gframe=tk.Frame(root)
 home.grid()
 
-logo = Image.open("./assets/logo.png")
-logo = logo.resize((150, 150), Image.ANTIALIAS)
-logo = ImageTk.PhotoImage(logo_image)
-logo_label = Label(home, image=logo)
+description = tk.Frame(home, bg='black', height=max_frame_height*0.9, width=max_frame_width*0.3)
+description.grid(row=0, column=1)
+
+
+logo = ImageTk.PhotoImage(file="./assets/logo.png")
+logo_label = Label(description, image=logo, width=300, height=300)
 logo_label.grid(row=0, column=0)
 
 close_button = tk.Button(root, text="Close", bg='Red', font='Chewy 20', command=root.destroy)
