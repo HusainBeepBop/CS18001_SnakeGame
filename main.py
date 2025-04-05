@@ -41,5 +41,8 @@ infoButton = tk.Button(des_section, text="Info", bg="#181818", fg="#f0f0f0", rel
 infoButton.pack(pady=(5, 5), padx=(5, 5), side=tk.BOTTOM)
 infoButton.configure(width=photoWidth)
 
+main_area_frame = tk.Frame(root, borderwidth=5, relief="groove")
+main_area_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=10, pady=10)
+
 root.mainloop()
 pygame.init()
