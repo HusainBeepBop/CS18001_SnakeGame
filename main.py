@@ -10,19 +10,22 @@ screen_height = root.winfo_screenheight()
 
 root.attributes('-fullscreen', True)
 root.title("Snake Game")
-Lframe=tk.Frame(root, height=100)
+home=tk.Frame(root, height=100)
 Gframe=tk.Frame(root)
-Lframe.pack()
+home.pack()
 
-im1=ImageTk.PhotoImage(Image.open("./assets/logo.png"))
-im1_label = Label(Lframe, image=im1)
-im1_label.grid(row=0, column=0)
+logo = ImageTk.PhotoImage(Image.open("./assets/logo.png"))
+logo_label = Label(home, image=logo)
+logo_label.grid(row=0, column=0)
+
+close_button = tk.Button(home, text="Close", bg='Red', font='Chewy 20', command=root.destroy)
+close_button.grid(row=0, column=2)
  
-single=tk.Button(Lframe, text="Single Player", bg='Orange', font='Chewy 40', height=2)
-single.grid(row=5, column=5)
+single_Player = tk.Button(home, text="Single Player", bg='Orange', font='Chewy 40', height=2)
+single_Player.grid(row=5, column=5)
 
-multi=tk.Button(Lframe, text="Multi Player", bg='Blue', font='Chewy 40', height=2)
-multi.grid(row=6, column=5)
+double_Player = tk.Button(home, text="Multi Player", bg='Blue', font='Chewy 40', height=2)
+double_Player.grid(row=6, column=5)
 
 root.mainloop()
 pygame.init()
