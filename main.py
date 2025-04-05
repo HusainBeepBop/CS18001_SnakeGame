@@ -19,11 +19,17 @@ des_section.pack(side=tk.LEFT, fill=tk.Y, padx=10, pady=10)
 des_section.configure(bg="#1f1f1f")
 des_section.pack_propagate(False)
 
+
 logo_frame = tk.Frame(des_section)
 logo_frame.pack(pady=(10, 5))
-logo = tk.PhotoImage(file="./assets/logo.png") 
-logo_label = tk.Label(logo_frame, image=logo)  
-logo_label.configure(width=des_width * 0.9, height=des_height * 0.4)
+logo_width = int(des_width * 0.9)
+logo_height = int(des_height * 0.4)
+logo_image = Image.open("./assets/logo.png")
+logo_image = logo_image.resize((logo_width, logo_height), Image.Resampling.LANCZOS)
+
+
+logo = ImageTk.PhotoImage(logo_image)
+logo_label = tk.Label(logo_frame, image=logo)
 logo_label.pack()
 
 root.mainloop()
