@@ -10,9 +10,9 @@ Lframe=tk.Frame(root, height=100)
 Gframe=tk.Frame(root)
 Lframe.pack()
 
-im1=ImageTk.PhotoImage(Image.open("C:\Users\Lenovo\Downloads\HD-wallpaper-classic-snake-adventures-snake-game.jpg"))
+im1=ImageTk.PhotoImage(Image.open("./assets/logo.png"))
 im1_label = Label(Lframe, image=im1)
-im1_label.pack()
+im1_label.grid(row=0, column=0)
  
 single=tk.Button(Lframe, text="Single Player", bg='Orange', font='Chewy 40', height=2)
 single.grid(row=5, column=5)
