@@ -63,7 +63,7 @@ main_area = tk.Frame(content_section)
 main_area.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
 
 start_game = tk.Frame(main_area)
-start_game.configure( height=100)
+start_game.configure( height=80)
 start_game.pack(side='bottom', fill=tk.X)
 start_game.pack_propagate(False)
 
