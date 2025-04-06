@@ -2,6 +2,7 @@ import pygame
 from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
+from tkinter import messagebox
 
 root = tk.Tk()
 root.title("Snake Game")
@@ -29,6 +30,7 @@ logo_image = logo_image.resize((photoWidth, photoHeight), Image.Resampling.LANCZ
 
 logo = ImageTk.PhotoImage(logo_image)
 logo_label = tk.Label(logo_frame, image=logo)
+logo_label.image=logo
 logo_label.pack()
 
 team_frame = tk.Frame(des_section, relief="raised")
@@ -37,7 +39,10 @@ team_frame.configure(bg="#f0f0f0")
 team_frame.pack_propagate(False)
 team_frame.configure(width=photoWidth, height=photoHeight)
 
-infoButton = tk.Button(des_section, text="Info", bg="#181818", fg="#f0f0f0", relief="raised")
+def info():
+    messagebox.showinfo("Info about Game", "Enter Info here")
+
+infoButton = tk.Button(des_section, text="Info", bg="#181818", fg="#f0f0f0", relief="raised", command=info)
 infoButton.pack(pady=(5, 5), padx=(5, 5), side=tk.BOTTOM)
 infoButton.configure(width=photoWidth)
 
@@ -59,14 +64,17 @@ main_area.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
 
 start_game = tk.Frame(main_area)
 start_game.configure( height=100)
-start_game.pack(side=BOTTOM, fill=tk.X)
+start_game.pack(side= 'bottom', fill=tk.X)
 start_game.pack_propagate(False)
 
-single_player = tk.Button(start_game, width=100, height=100, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised")
-single_player.pack(side=LEFT, pady=(0, 5), fill=tk.X)
+def sp():
+    game_canvas= Canvas(main_area, width=200, height=100, bg="green").pack(anchor=tk.CENTER,expand=True)
+
+single_player = tk.Button(start_game, width=85, height=100, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
+single_player.pack(side='left', pady=(0, 5), fill=tk.X)
 
 dual_player = tk.Button(start_game, width=100, height=100, text="Dual Player", bg="#181818", fg="#f0f0f0", relief="raised")
-dual_player.pack(side=RIGHT, pady=(0, 5), fill=tk.X)
+dual_player.pack(side='right', pady=(0, 5), fill=tk.X)
 
 root.mainloop()
 pygame.init()
