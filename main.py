@@ -83,7 +83,6 @@ def sp():
         dp_game_canvas_right.destroy()
     try:
         sp_game_canvas.destroy()
-        dp_game_canvas.destroy()
     except:
         pass
 
