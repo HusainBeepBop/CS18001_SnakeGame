@@ -72,7 +72,6 @@ sp_game_canvas = None
 dp_game_canvas_left = None
 dp_game_canvas_right = None
 
-
 def sp():
     
     global sp_game_canvas  
@@ -82,7 +81,6 @@ def sp():
         dp_game_canvas_left.destroy()
     if dp_game_canvas_right is not None:
         dp_game_canvas_right.destroy()
-
     try:
         sp_game_canvas.destroy()
         dp_game_canvas.destroy()
@@ -97,20 +95,17 @@ def dp():
 
     if sp_game_canvas is not None:
         sp_game_canvas.destroy()
-
     try:
         dp_game_canvas_left.destroy()
         dp_game_canvas_right.destroy()
     except:
         pass
-
     
     dp_game_canvas_left = tk.Canvas(main_area, bg="blue")
     dp_game_canvas_left.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
     dp_game_canvas_right = tk.Canvas(main_area, bg="red")
     dp_game_canvas_right.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
-
 
 single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
 single_player.pack(side='left', pady=(0, 5), fill=tk.BOTH, expand=True)
