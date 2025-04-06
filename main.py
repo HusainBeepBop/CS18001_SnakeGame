@@ -64,17 +64,18 @@ main_area.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
 
 start_game = tk.Frame(main_area)
 start_game.configure( height=100)
-start_game.pack(side= 'bottom', fill=tk.X)
+start_game.pack(side='bottom', fill=tk.X)
 start_game.pack_propagate(False)
 
 def sp():
-    game_canvas= Canvas(main_area, width=200, height=100, bg="green").pack(anchor=tk.CENTER,expand=True)
+    game_canvas= Canvas(main_area, bg="green")
+    game_canvas.pack(anchor=tk.CENTER, expand=True)
 
-single_player = tk.Button(start_game, width=85, height=100, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
-single_player.pack(side='left', pady=(0, 5), fill=tk.X)
+single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
+single_player.pack(side='left', pady=(0, 5), fill=tk.BOTH, expand=True)
 
-dual_player = tk.Button(start_game, width=100, height=100, text="Dual Player", bg="#181818", fg="#f0f0f0", relief="raised")
-dual_player.pack(side='right', pady=(0, 5), fill=tk.X)
+dual_player = tk.Button(start_game, text="Dual Player", bg="#181818", fg="#f0f0f0", relief="raised")
+dual_player.pack(side='right', pady=(0, 5), fill=tk.BOTH, expand=True)
 
 root.mainloop()
 pygame.init()
