@@ -61,6 +61,7 @@ close_button.pack_propagate(False)
 
 main_area = tk.Frame(content_section)
 main_area.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+main_area.pack_propagate(False)
 
 start_game = tk.Frame(main_area)
 start_game.configure( height=80)
@@ -68,10 +69,19 @@ start_game.pack(side='bottom', fill=tk.X)
 start_game.pack_propagate(False)
 
 sp_game_canvas = None  
+dp_game_canvas_left = None
+dp_game_canvas_right = None
+
 
 def sp():
     
     global sp_game_canvas  
+    global dp_game_canvas_right, dp_game_canvas_left
+
+    if dp_game_canvas_left is not None:
+        dp_game_canvas_left.destroy()
+    if dp_game_canvas_right is not None:
+        dp_game_canvas_right.destroy()
 
     try:
         sp_game_canvas.destroy()
@@ -83,16 +93,23 @@ def sp():
     sp_game_canvas.pack(fill=tk.BOTH, expand=True)
 
 def dp():
-    global dp_game_canvas  
+    global dp_game_canvas_left, dp_game_canvas_right, sp_game_canvas
+
+    if sp_game_canvas is not None:
+        sp_game_canvas.destroy()
 
     try:
-        dp_game_canvas.destroy()
-        sp_game_canvas.destroy()
+        dp_game_canvas_left.destroy()
+        dp_game_canvas_right.destroy()
     except:
         pass
 
-    dp_game_canvas= Canvas(main_area, bg="blue")
-    dp_game_canvas.pack(fill=tk.BOTH, expand=True)
+    
+    dp_game_canvas_left = tk.Canvas(main_area, bg="blue")
+    dp_game_canvas_left.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+    dp_game_canvas_right = tk.Canvas(main_area, bg="red")
+    dp_game_canvas_right.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
 
 single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
