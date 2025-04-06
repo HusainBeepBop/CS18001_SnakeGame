@@ -96,7 +96,7 @@ def dp():
 single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
 single_player.pack(side='left', pady=(0, 5), fill=tk.BOTH, expand=True)
 
-dual_player = tk.Button(start_game, text="Dual Player", bg="#181818", fg="#f0f0f0", relief="raised")
+dual_player = tk.Button(start_game, text="Dual Player", bg="#181818", fg="#f0f0f0", relief="raised", command=dp)
 dual_player.pack(side='right', pady=(0, 5), fill=tk.BOTH, expand=True)
 
 root.mainloop()
