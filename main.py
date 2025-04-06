@@ -56,7 +56,7 @@ close_game.configure(width=content_section.winfo_width(), height=content_section
 
 
 close_button = tk.Button(close_game, text="X", font=('Arial',16), bg="#181818", fg="#f0f0f0", relief="raised", command=root.destroy)
-close_button.pack(side=tk.LEFT, anchor=tk.NE)
+close_button.pack(side=tk.RIGHT, anchor=tk.NE)
 close_button.pack_propagate(False)
 
 main_area = tk.Frame(content_section)
@@ -71,16 +71,23 @@ start_game.pack_propagate(False)
 sp_game_canvas = None  
 dp_game_canvas_left = None
 dp_game_canvas_right = None
+score_p1 = 0
+score_p2 = 0
+
+score_counter_p1 = tk.Label(close_game, text=f"Player 1: {score_p1}", font=("Arial", 23), bg="#181818", fg='white')
+score_counter_p1.pack(side=tk.LEFT, anchor=tk.W)
 
 def sp():
     
     global sp_game_canvas  
-    global dp_game_canvas_right, dp_game_canvas_left
+    global dp_game_canvas_right, dp_game_canvas_left, score_counter_p2, score_p2
 
     if dp_game_canvas_left is not None:
         dp_game_canvas_left.destroy()
     if dp_game_canvas_right is not None:
         dp_game_canvas_right.destroy()
+    if score_counter_p2 is not None:
+        score_counter_p2.destroy()
     try:
         sp_game_canvas.destroy()
     except:
@@ -89,14 +96,17 @@ def sp():
     sp_game_canvas= Canvas(main_area, bg="green")
     sp_game_canvas.pack(fill=tk.BOTH, expand=True)
 
+   
+
 def dp():
-    global dp_game_canvas_left, dp_game_canvas_right, sp_game_canvas
+    global dp_game_canvas_left, dp_game_canvas_right, sp_game_canvas, score_counter_p2, score_p2
 
     if sp_game_canvas is not None:
-        sp_game_canvas.destroy()
+        sp_game_canvas.destroy()  
     try:
         dp_game_canvas_left.destroy()
         dp_game_canvas_right.destroy()
+        score_counter_p2.destroy()
     except:
         pass
     
@@ -105,6 +115,9 @@ def dp():
 
     dp_game_canvas_right = tk.Canvas(main_area, bg="red")
     dp_game_canvas_right.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
+
+    score_counter_p2 = tk.Label(close_game, text=f"Player 2: {score_p2}", font=("Arial", 23), bg="#181818", fg='white')
+    score_counter_p2.pack(side=tk.LEFT, anchor=tk.W)
 
 single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
 single_player.pack(side='left', pady=(0, 5), fill=tk.BOTH, expand=True)
