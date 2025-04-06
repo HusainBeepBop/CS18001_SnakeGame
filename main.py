@@ -67,9 +67,19 @@ start_game.configure( height=100)
 start_game.pack(side='bottom', fill=tk.X)
 start_game.pack_propagate(False)
 
+sp_game_canvas = None  
+
 def sp():
-    game_canvas= Canvas(main_area, bg="green")
-    game_canvas.pack(anchor=tk.CENTER, expand=True)
+    
+    global sp_game_canvas  
+
+    try:
+        sp_game_canvas.destroy()
+    except:
+        pass
+
+    sp_game_canvas= Canvas(main_area, bg="green")
+    sp_game_canvas.pack( expand=True)
 
 single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
 single_player.pack(side='left', pady=(0, 5), fill=tk.BOTH, expand=True)
