@@ -81,6 +81,18 @@ def sp():
     sp_game_canvas= Canvas(main_area, bg="green")
     sp_game_canvas.pack( expand=True)
 
+def dp():
+    global dp_game_canvas  
+
+    try:
+        dp_game_canvas.destroy()
+    except:
+        pass
+
+    dp_game_canvas= Canvas(main_area, bg="blue")
+    dp_game_canvas.pack( expand=True)
+
+
 single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
 single_player.pack(side='left', pady=(0, 5), fill=tk.BOTH, expand=True)
 
