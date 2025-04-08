@@ -86,6 +86,9 @@ score_counter_p1.pack(side=tk.LEFT, anchor=tk.W)
 def spawn_food():
     import random
 
+    canvs_width = sp_game_canvas.winfo_width()
+    canvs_height = sp_game_canvas.winfo_height()
+
 def sp():
     
     global sp_game_canvas  
