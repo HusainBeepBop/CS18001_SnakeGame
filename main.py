@@ -151,11 +151,47 @@ def spawn_food2():
 
     food2 = dp_game_canvas_right.create_oval(foodx, foody, foodx + 20, foody + 20, fill="red")
 
+def snake_move():
+
+    global snake, snake_body, direction
+
+    head_x, head_y = snake[0]
+    if direction == "Right":
+        head_x += 20
+    elif direction == "Left":
+        head_x -= 20
+    elif direction == "Up":
+        head_y -= 20
+    elif direction == "Down":
+        head_y += 20
+
+    snake.insert(0, (head_x, head_y))
+    new_part = sp_game_canvas.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill="black")
+    snake_body.insert(0, new_part)
+
+    tail = snake.pop()
+    sp_game_canvas.delete(snake_body.pop())
+    sp_game_canvas.after(100, snake_move)  
+
+def change_direction(event):
+    
+    global direction
+
+    key = event.keysym
+    if key in ("Up", "w") and direction != "Down":
+        direction = "Up"
+    elif key in ("Down", "s") and direction != "Up":
+        direction = "Down"
+    elif key in ("Left", "a") and direction != "Right":
+        direction = "Left"
+    elif key in ("Right", "d") and direction != "Left":
+        direction = "Right"
 
 def sp():
     
     global sp_game_canvas  
     global dp_game_canvas_right, dp_game_canvas_left, score_counter_p2, score_p2
+    global snake, snake_body, direction
 
     if dp_game_canvas_left is not None:
         dp_game_canvas_left.destroy()
@@ -176,8 +212,15 @@ def sp():
     for x, y in snake:
         snake_body.append(sp_game_canvas.create_rectangle(x, y, x+20, y+20, fill="black"))
 
+    direction = "Right"
+
+    sp_game_canvas.focus_set()
+    sp_game_canvas.bind("<KeyPress>", change_direction)
+
     sp_game_canvas.after(50, draw_grid)
     sp_game_canvas.after(100, spawn_food)
+
+    snake_move()
 
    
 
