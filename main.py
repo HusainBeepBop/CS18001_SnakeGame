@@ -214,7 +214,7 @@ def snake_move2():
         head_y += 20
 
     snake2.insert(0, (head_x, head_y))
-    new_part = dp_game_canvas_right.create_rectangle(head_x, head_y, head_x + 20, head_x + 20, fill="white")
+    new_part = dp_game_canvas_right.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill="white")
     snake2_body.insert(0, new_part)
 
     tail = snake2.pop()
