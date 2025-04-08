@@ -12,6 +12,8 @@ root.configure(bg="#1f1f1f")
 snake = []
 snake_body = []
 food = None
+food1 = None
+food2 = None
 direction = 'Right'
 speed = 100
 
@@ -105,6 +107,29 @@ def spawn_food():
 
     food = sp_game_canvas.create_oval(foodx, foody, foodx + 20, foody + 20, fill="red")
 
+def spawn_food1():
+    import random
+
+    canvs_width = dp_game_canvas_left.winfo_width()
+    canvs_height = dp_game_canvas_left.winfo_height()
+
+    foodx = random.randint(1, (canvs_width // 20)- 1) * 20
+    foody = random.randint(1, (canvs_height // 20)- 1) * 20
+
+    food1 = dp_game_canvas_left.create_oval(foodx, foody, foodx + 20, foody + 20, fill="red")
+
+def spawn_food2():
+    import random
+
+    canvs_width = dp_game_canvas_right.winfo_width()
+    canvs_height = dp_game_canvas_right.winfo_height()
+
+    foodx = random.randint(1, (canvs_width // 20)- 1) * 20
+    foody = random.randint(1, (canvs_height // 20)- 1) * 20
+
+    food2 = dp_game_canvas_right.create_oval(foodx, foody, foodx + 20, foody + 20, fill="red")
+
+
 def sp():
     
     global sp_game_canvas  
@@ -149,7 +174,7 @@ def dp():
     dp_game_canvas_left = tk.Canvas(main_area, bg="blue")
     dp_game_canvas_left.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-    dp_game_canvas_right = tk.Canvas(main_area, bg="red")
+    dp_game_canvas_right = tk.Canvas(main_area, bg="purple")
     dp_game_canvas_right.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
     score_counter_p2 = tk.Label(close_game, text=f"Player 2: {score_p2}", font=("Arial", 23), bg="#181818", fg='white')
@@ -168,6 +193,9 @@ def dp():
 
     direction1 = "Right"
     direction2 = "Right"
+
+    dp_game_canvas_left.after(100, spawn_food1)
+    dp_game_canvas_right.after(100, spawn_food2)
 
 single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
 single_player.pack(side='left', pady=(0, 5), fill=tk.BOTH, expand=True)
