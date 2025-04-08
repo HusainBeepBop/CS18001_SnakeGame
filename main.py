@@ -16,7 +16,7 @@ food1 = None
 food2 = None
 direction = 'Right'
 speed = 100
-
+test = None
 vpWidth = root.winfo_screenwidth()
 vpheight = root.winfo_screenheight()
 
