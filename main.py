@@ -22,7 +22,7 @@ direction = 'Right'
 direction1 = 'Right'
 direction2 = 'Right'
 speed = 100
-test = None
+
 vpWidth = root.winfo_screenwidth()
 vpheight = root.winfo_screenheight()
 
