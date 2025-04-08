@@ -83,6 +83,9 @@ score_p2 = 0
 score_counter_p1 = tk.Label(close_game, text=f"Player 1: {score_p1}", font=("Arial", 23), bg="#181818", fg='white')
 score_counter_p1.pack(side=tk.LEFT, anchor=tk.W)
 
+def spawn_food():
+    import random
+
 def sp():
     
     global sp_game_canvas  
