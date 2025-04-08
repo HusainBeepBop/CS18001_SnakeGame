@@ -83,16 +83,27 @@ score_p2 = 0
 score_counter_p1 = tk.Label(close_game, text=f"Player 1: {score_p1}", font=("Arial", 23), bg="#181818", fg='white')
 score_counter_p1.pack(side=tk.LEFT, anchor=tk.W)
 
+def draw_grid():
+    grid_size = 20
+    canvas_width = sp_game_canvas.winfo_width()
+    canvas_height = sp_game_canvas.winfo_height()
+
+    for x in range(0, canvas_width, grid_size):
+        sp_game_canvas.create_line(x, 0, x, canvas_height, fill="lightgray")
+
+    for y in range(0, canvas_height, grid_size):
+        sp_game_canvas.create_line(0, y, canvas_width, y, fill="lightgray")
+
 def spawn_food():
     import random
 
     canvs_width = sp_game_canvas.winfo_width()
     canvs_height = sp_game_canvas.winfo_height()
 
-    foodx = random.randint(1, (canvs_width // 10)- 1) * 10
-    foody = random.randint(1, (canvs_height // 10)- 1) * 10
+    foodx = random.randint(1, (canvs_width // 20)- 1) * 20
+    foody = random.randint(1, (canvs_height // 20)- 1) * 20
 
-    food = sp_game_canvas.create_oval(foodx, foody, foodx + 10, foody + 10, fill="red")
+    food = sp_game_canvas.create_oval(foodx, foody, foodx + 20, foody + 20, fill="red")
 
 def sp():
     
@@ -113,11 +124,12 @@ def sp():
     sp_game_canvas= Canvas(main_area, bg="green")
     sp_game_canvas.pack(fill=tk.BOTH, expand=True)
 
-    snake = [(100,100),(90,100)]
+    snake = [(100,100),(80,100)]
     snake_body = []
     for x, y in snake:
-        snake_body.append(sp_game_canvas.create_rectangle(x, y, x+10, y+10, fill="black"))
+        snake_body.append(sp_game_canvas.create_rectangle(x, y, x+20, y+20, fill="black"))
 
+    sp_game_canvas.after(50, draw_grid)
     sp_game_canvas.after(100, spawn_food)
 
    
