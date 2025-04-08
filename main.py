@@ -155,6 +155,20 @@ def dp():
     score_counter_p2 = tk.Label(close_game, text=f"Player 2: {score_p2}", font=("Arial", 23), bg="#181818", fg='white')
     score_counter_p2.pack(side=tk.LEFT, anchor=tk.W)
 
+    snake1 = [(100, 100),  (80, 100)]  
+    snake2 = [(100, 100), (80, 100)]  
+    snake1_body = []
+    snake2_body = []
+
+    for x, y in snake1:
+        snake1_body.append(dp_game_canvas_left.create_rectangle(x, y, x + 20, y + 20, fill="white"))
+
+    for x, y in snake2:
+        snake2_body.append(dp_game_canvas_right.create_rectangle(x, y, x + 20, y + 20, fill="white"))
+
+    direction1 = "Right"
+    direction2 = "Right"
+
 single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
 single_player.pack(side='left', pady=(0, 5), fill=tk.BOTH, expand=True)
 
