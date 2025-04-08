@@ -11,10 +11,16 @@ root.configure(bg="#1f1f1f")
 
 snake = []
 snake_body = []
+snake1 = []
+snake1_body = []
+snake2 = []
+snake2_body = []
 food = None
 food1 = None
 food2 = None
 direction = 'Right'
+direction1 = 'Right'
+direction2 = 'Right'
 speed = 100
 
 vpWidth = root.winfo_screenwidth()
@@ -173,6 +179,49 @@ def snake_move():
     sp_game_canvas.delete(snake_body.pop())
     sp_game_canvas.after(100, snake_move)  
 
+def snake_move1():
+    global snake1, snake1_body, direction1
+
+    head_x, head_y = snake1[0]
+    if direction1 == "Right":
+        head_x += 20
+    elif direction1 == "Left":
+        head_x -= 20
+    elif direction1 == "Up":
+        head_y -= 20
+    elif direction1 == "Down":
+        head_y += 20
+
+    snake1.insert(0, (head_x, head_y))
+    new_part = dp_game_canvas_left.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill="white")
+    snake1_body.insert(0, new_part)
+
+    tail = snake1.pop()
+    dp_game_canvas_left.delete(snake1_body.pop())
+    dp_game_canvas_left.after(100, snake_move1)
+
+def snake_move2():
+    global snake2, snake2_body, direction2
+
+    head_x, head_y = snake2[0]
+    if direction2 == "Right":
+        head_x += 20
+    elif direction2 == "Left":
+        head_x -= 20
+    elif direction2 == "Up":
+        head_y -= 20
+    elif direction2 == "Down":
+        head_y += 20
+
+    snake2.insert(0, (head_x, head_y))
+    new_part = dp_game_canvas_right.create_rectangle(head_x, head_y, head_x + 20, head_x + 20, fill="white")
+    snake2_body.insert(0, new_part)
+
+    tail = snake2.pop()
+    dp_game_canvas_right.delete(snake2_body.pop())
+    dp_game_canvas_right.after(100, snake_move2)
+
+
 def change_direction(event):
     
     global direction
@@ -186,6 +235,31 @@ def change_direction(event):
         direction = "Left"
     elif key in ("Right", "d") and direction != "Left":
         direction = "Right"
+
+def handle_keypress(event):
+    
+    global direction1, direction2
+
+    key = event.keysym
+
+    if key in ("w", "W") and direction1 != "Down":
+        direction1 = "Up"
+    elif key in ("s", "S") and direction1 != "Up":
+        direction1 = "Down"
+    elif key in ("a", "A") and direction1 != "Right":
+        direction1 = "Left"
+    elif key in ("d", "D") and direction1 != "Left":
+        direction1 = "Right"
+
+    if key == "Up" and direction2 != "Down":
+        direction2 = "Up"
+    elif key == "Down" and direction2 != "Up":
+        direction2 = "Down"
+    elif key == "Left" and direction2 != "Right":
+        direction2 = "Left"
+    elif key == "Right" and direction2 != "Left":
+        direction2 = "Right"
+
 
 def sp():
     
@@ -225,7 +299,10 @@ def sp():
    
 
 def dp():
-    global dp_game_canvas_left, dp_game_canvas_right, sp_game_canvas, score_counter_p2, score_p2
+    global dp_game_canvas_left, dp_game_canvas_right, sp_game_canvas
+    global score_counter_p2, score_p2
+    global snake1, snake1_body, direction1
+    global snake2, snake2_body, direction2
 
     if sp_game_canvas is not None:
         sp_game_canvas.destroy()  
@@ -245,8 +322,8 @@ def dp():
     score_counter_p2 = tk.Label(close_game, text=f"Player 2: {score_p2}", font=("Arial", 23), bg="#181818", fg='white')
     score_counter_p2.pack(side=tk.LEFT, anchor=tk.W)
 
-    snake1 = [(100, 100),  (80, 100)]  
-    snake2 = [(100, 100), (80, 100)]  
+    snake1 = [(100, 100),  (80, 100)]
+    snake2 = [(100, 100), (80, 100)]
     snake1_body = []
     snake2_body = []
 
@@ -259,10 +336,16 @@ def dp():
     direction1 = "Right"
     direction2 = "Right"
 
+    root.bind("<KeyPress>", handle_keypress)
+
     dp_game_canvas_left.after(50, draw_grid1)
     dp_game_canvas_right.after(50, draw_grid2)
     dp_game_canvas_left.after(100, spawn_food1)
     dp_game_canvas_right.after(100, spawn_food2)
+
+    snake_move1()
+    snake_move2()
+
 
 single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
 single_player.pack(side='left', pady=(0, 5), fill=tk.BOTH, expand=True)
