@@ -96,6 +96,28 @@ def draw_grid():
     for y in range(0, canvas_height, grid_size):
         sp_game_canvas.create_line(0, y, canvas_width, y, fill="lightgray")
 
+def draw_grid1():
+    grid_size = 20
+    canvas_width = dp_game_canvas_left.winfo_width()
+    canvas_height = dp_game_canvas_left.winfo_height()
+
+    for x in range(0, canvas_width, grid_size):
+        dp_game_canvas_left.create_line(x, 0, x, canvas_height, fill="lightgray")
+
+    for y in range(0, canvas_height, grid_size):
+        dp_game_canvas_left.create_line(0, y, canvas_width, y, fill="lightgray")
+
+def draw_grid2():
+    grid_size = 20
+    canvas_width = dp_game_canvas_right.winfo_width()
+    canvas_height = dp_game_canvas_right.winfo_height()
+
+    for x in range(0, canvas_width, grid_size):
+        dp_game_canvas_right.create_line(x, 0, x, canvas_height, fill="lightgray")
+
+    for y in range(0, canvas_height, grid_size):
+        dp_game_canvas_right.create_line(0, y, canvas_width, y, fill="lightgray")
+
 def spawn_food():
     import random
 
@@ -194,6 +216,8 @@ def dp():
     direction1 = "Right"
     direction2 = "Right"
 
+    dp_game_canvas_left.after(50, draw_grid1)
+    dp_game_canvas_right.after(50, draw_grid2)
     dp_game_canvas_left.after(100, spawn_food1)
     dp_game_canvas_right.after(100, spawn_food2)
 
