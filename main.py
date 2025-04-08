@@ -105,25 +105,25 @@ def draw_grid():
 
 def draw_grid1():
     grid_size = 20
-    canvas_width = dp_game_canvas_left.winfo_width()
-    canvas_height = dp_game_canvas_left.winfo_height()
+    canvas_width1 = dp_game_canvas_left.winfo_width()
+    canvas_height1 = dp_game_canvas_left.winfo_height()
 
-    for x in range(0, canvas_width, grid_size):
-        dp_game_canvas_left.create_line(x, 0, x, canvas_height, fill="lightgray")
+    for x in range(0, canvas_width1, grid_size):
+        dp_game_canvas_left.create_line(x, 0, x, canvas_height1, fill="lightgray")
 
-    for y in range(0, canvas_height, grid_size):
-        dp_game_canvas_left.create_line(0, y, canvas_width, y, fill="lightgray")
+    for y in range(0, canvas_height1, grid_size):
+        dp_game_canvas_left.create_line(0, y, canvas_width1, y, fill="lightgray")
 
 def draw_grid2():
     grid_size = 20
-    canvas_width = dp_game_canvas_right.winfo_width()
-    canvas_height = dp_game_canvas_right.winfo_height()
+    canvas_width2 = dp_game_canvas_right.winfo_width()
+    canvas_height2 = dp_game_canvas_right.winfo_height()
 
-    for x in range(0, canvas_width, grid_size):
-        dp_game_canvas_right.create_line(x, 0, x, canvas_height, fill="lightgray")
+    for x in range(0, canvas_width2, grid_size):
+        dp_game_canvas_right.create_line(x, 0, x, canvas_height2, fill="lightgray")
 
-    for y in range(0, canvas_height, grid_size):
-        dp_game_canvas_right.create_line(0, y, canvas_width, y, fill="lightgray")
+    for y in range(0, canvas_height2, grid_size):
+        dp_game_canvas_right.create_line(0, y, canvas_width2, y, fill="lightgray")
 
 def spawn_food():
     import random
@@ -141,11 +141,11 @@ def spawn_food1():
     import random
     global food1
 
-    canvs_width = dp_game_canvas_left.winfo_width()
-    canvs_height = dp_game_canvas_left.winfo_height()
+    canvs_width1 = dp_game_canvas_left.winfo_width()
+    canvs_height1 = dp_game_canvas_left.winfo_height()
 
-    foodx = random.randint(1, (canvs_width // 20)- 1) * 20
-    foody = random.randint(1, (canvs_height // 20)- 1) * 20
+    foodx = random.randint(1, (canvs_width1 // 20)- 1) * 20
+    foody = random.randint(1, (canvs_height1 // 20)- 1) * 20
 
     food1 = dp_game_canvas_left.create_oval(foodx, foody, foodx + 20, foody + 20, fill="red")
 
@@ -153,11 +153,11 @@ def spawn_food2():
     import random
     global food2
 
-    canvs_width = dp_game_canvas_right.winfo_width()
-    canvs_height = dp_game_canvas_right.winfo_height()
+    canvs_width2 = dp_game_canvas_right.winfo_width()
+    canvs_height2 = dp_game_canvas_right.winfo_height()
 
-    foodx = random.randint(1, (canvs_width // 20)- 1) * 20
-    foody = random.randint(1, (canvs_height // 20)- 1) * 20
+    foodx = random.randint(1, (canvs_width2 // 20)- 1) * 20
+    foody = random.randint(1, (canvs_height2 // 20)- 1) * 20
 
     food2 = dp_game_canvas_right.create_oval(foodx, foody, foodx + 20, foody + 20, fill="red")
 
@@ -173,7 +173,25 @@ def snake_move():
         head_y -= 20
     elif direction == "Down":
         head_y += 20
-
+        
+    if head_x<0 or head_x>=canvas_width or head_y<0 or head_y>=canvas_height:
+        messagebox.showinfo("Game Over", "You crashed into the wall! Your Score: {score_p1}")
+        sp_game_canvas.delete("all")
+        snake.clear()
+        snake_body.clear()
+        score_p1=0
+        score_counter_p1.config(text=f"Player 1: {score_p1}")
+        return
+    
+    if (head_x, head_y) in snake:
+        messagebox.showinfo("Game Over", f"You bit yourself! Your Score: {score_p1}")
+        sp_game_canvas.delete("all")
+        snake.clear()
+        snake_body.clear()
+        score_p1=0
+        score_counter_p1.config(text=f"Player 1: {score_p1}")
+        return
+        
     new_head = (head_x, head_y)
     snake.insert(0, new_head)
     new_block = sp_game_canvas.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill="black")
@@ -188,9 +206,11 @@ def snake_move():
             score_counter_p1.config(text=f"Player 1: {score_p1}")
             sp_game_canvas.delete(food)
             spawn_food()
-        else:
-            tail = snake.pop()
-            sp_game_canvas.delete(snake_body.pop())
+            sp_game_canvas.after(100, snake_move)
+            return
+
+    tail = snake.pop()
+    sp_game_canvas.delete(snake_body.pop())
 
     sp_game_canvas.after(100, snake_move)
 
