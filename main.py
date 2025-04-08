@@ -9,6 +9,12 @@ root.title("Snake Game")
 root.attributes('-fullscreen', True)
 root.configure(bg="#1f1f1f")
 
+snake = []
+snake_body = []
+food = None
+direction = 'Right'
+speed = 100
+
 vpWidth = root.winfo_screenwidth()
 vpheight = root.winfo_screenheight()
 
