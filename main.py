@@ -102,6 +102,11 @@ def sp():
     sp_game_canvas= Canvas(main_area, bg="green")
     sp_game_canvas.pack(fill=tk.BOTH, expand=True)
 
+    snake = [(100,100),(90,100)]
+    snake_body = []
+    for x, y in snake:
+        snake_body.append(sp_game_canvas.create_rectangle(x, y, x+10, y+10, fill="black"))
+
    
 
 def dp():
