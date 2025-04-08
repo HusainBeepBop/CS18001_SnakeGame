@@ -85,6 +85,7 @@ start_game.pack_propagate(False)
 sp_game_canvas = None  
 dp_game_canvas_left = None
 dp_game_canvas_right = None
+global score_p1, score_p2
 score_p1 = 0
 score_p2 = 0
 
@@ -126,6 +127,7 @@ def draw_grid2():
 
 def spawn_food():
     import random
+    global food
 
     canvs_width = sp_game_canvas.winfo_width()
     canvs_height = sp_game_canvas.winfo_height()
@@ -137,6 +139,7 @@ def spawn_food():
 
 def spawn_food1():
     import random
+    global food1
 
     canvs_width = dp_game_canvas_left.winfo_width()
     canvs_height = dp_game_canvas_left.winfo_height()
@@ -148,6 +151,7 @@ def spawn_food1():
 
 def spawn_food2():
     import random
+    global food2
 
     canvs_width = dp_game_canvas_right.winfo_width()
     canvs_height = dp_game_canvas_right.winfo_height()
@@ -158,8 +162,7 @@ def spawn_food2():
     food2 = dp_game_canvas_right.create_oval(foodx, foody, foodx + 20, foody + 20, fill="red")
 
 def snake_move():
-
-    global snake, snake_body, direction
+    global snake, snake_body, direction, score_p1, food
 
     head_x, head_y = snake[0]
     if direction == "Right":
@@ -171,16 +174,29 @@ def snake_move():
     elif direction == "Down":
         head_y += 20
 
-    snake.insert(0, (head_x, head_y))
-    new_part = sp_game_canvas.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill="black")
-    snake_body.insert(0, new_part)
+    new_head = (head_x, head_y)
+    snake.insert(0, new_head)
+    new_block = sp_game_canvas.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill="black")
+    snake_body.insert(0, new_block)
 
-    tail = snake.pop()
-    sp_game_canvas.delete(snake_body.pop())
-    sp_game_canvas.after(100, snake_move)  
+    if food is not None:
+        coords = sp_game_canvas.coords(food)
+        food_x, food_y = int(coords[0]), int(coords[1])
+    
+        if head_x == food_x and head_y == food_y:
+            score_p1 += 1
+            score_counter_p1.config(text=f"Player 1: {score_p1}")
+            sp_game_canvas.delete(food)
+            spawn_food()
+        else:
+            tail = snake.pop()
+            sp_game_canvas.delete(snake_body.pop())
+
+    sp_game_canvas.after(100, snake_move)
+
 
 def snake_move1():
-    global snake1, snake1_body, direction1
+    global snake1, snake1_body, direction1, score_p1, food1
 
     head_x, head_y = snake1[0]
     if direction1 == "Right":
@@ -191,17 +207,28 @@ def snake_move1():
         head_y -= 20
     elif direction1 == "Down":
         head_y += 20
+        
+    new_head = (head_x, head_y)
+    snake1.insert(0, new_head)
+    new_block = dp_game_canvas_left.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill="black")
+    snake1_body.insert(0, new_block)
 
-    snake1.insert(0, (head_x, head_y))
-    new_part = dp_game_canvas_left.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill="white")
-    snake1_body.insert(0, new_part)
-
-    tail = snake1.pop()
-    dp_game_canvas_left.delete(snake1_body.pop())
+    if food1 is not None:
+        coords = dp_game_canvas_left.coords(food1)
+        food_x, food_y = int(coords[0]), int(coords[1])
+ 
+        if head_x == food_x and head_y == food_y:
+            score_p1 += 1
+            score_counter_p1.config(text=f"Player 1: {score_p1}")
+            dp_game_canvas_left.delete(food1)
+            spawn_food1()
+        else:
+            tail = snake1.pop()
+            dp_game_canvas_left.delete(snake1_body.pop())
     dp_game_canvas_left.after(100, snake_move1)
 
 def snake_move2():
-    global snake2, snake2_body, direction2
+    global snake2, snake2_body, direction2, score_p2, food2
 
     head_x, head_y = snake2[0]
     if direction2 == "Right":
@@ -213,12 +240,23 @@ def snake_move2():
     elif direction2 == "Down":
         head_y += 20
 
-    snake2.insert(0, (head_x, head_y))
-    new_part = dp_game_canvas_right.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill="white")
-    snake2_body.insert(0, new_part)
+    new_head = (head_x, head_y)
+    snake2.insert(0, new_head)
+    new_block = dp_game_canvas_right.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill="black")
+    snake2_body.insert(0, new_block)
 
-    tail = snake2.pop()
-    dp_game_canvas_right.delete(snake2_body.pop())
+    if food2 is not None:
+        coords = dp_game_canvas_right.coords(food2)
+        food_x, food_y = int(coords[0]), int(coords[1])
+ 
+        if head_x == food_x and head_y == food_y:
+            score_p2 += 1
+            score_counter_p2.config(text=f"Player 2: {score_p2}")
+            dp_game_canvas_right.delete(food2)
+            spawn_food2()
+        else:
+            tail = snake2.pop()
+            dp_game_canvas_right.delete(snake2_body.pop())
     dp_game_canvas_right.after(100, snake_move2)
 
 
