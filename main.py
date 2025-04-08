@@ -89,6 +89,11 @@ def spawn_food():
     canvs_width = sp_game_canvas.winfo_width()
     canvs_height = sp_game_canvas.winfo_height()
 
+    foodx = random.randint(1, (canvs_width // 10)- 1) * 10
+    foody = random.randint(1, (canvs_height // 10)- 1) * 10
+
+    food = sp_game_canvas.create_oval(foodx, foody, foodx + 10, foody + 10, fill="red")
+
 def sp():
     
     global sp_game_canvas  
@@ -112,6 +117,8 @@ def sp():
     snake_body = []
     for x, y in snake:
         snake_body.append(sp_game_canvas.create_rectangle(x, y, x+10, y+10, fill="black"))
+
+    sp_game_canvas.after(100, spawn_food)
 
    
 
