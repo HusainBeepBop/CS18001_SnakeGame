@@ -164,6 +164,9 @@ def spawn_food2():
 def snake_move():
     global snake, snake_body, direction, score_p1, food
 
+    canvas_width = sp_game_canvas.winfo_width()
+    canvas_height = sp_game_canvas.winfo_height()
+
     head_x, head_y = snake[0]
     if direction == "Right":
         head_x += 20
@@ -352,7 +355,7 @@ def sp():
     sp_game_canvas.after(50, draw_grid)
     sp_game_canvas.after(100, spawn_food)
 
-    snake_move()
+    sp_game_canvas.after(200, snake_move)
 
    
 
