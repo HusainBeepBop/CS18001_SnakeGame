@@ -97,7 +97,7 @@ score_counter_p1 = tk.Label(close_game, text=f"Player 1: {score_p1}", font=("Ari
 score_counter_p1.pack(side=tk.LEFT, anchor=tk.W)
 
 def draw_grid():
-    grid_size = 20
+    grid_size = 40
     canvas_width = sp_game_canvas.winfo_width()
     canvas_height = sp_game_canvas.winfo_height()
 
@@ -108,7 +108,7 @@ def draw_grid():
         sp_game_canvas.create_line(0, y, canvas_width, y, fill="lightgray")
 
 def draw_grid1():
-    grid_size = 20
+    grid_size = 40
     canvas_width1 = dp_game_canvas_left.winfo_width()
     canvas_height1 = dp_game_canvas_left.winfo_height()
 
@@ -119,7 +119,7 @@ def draw_grid1():
         dp_game_canvas_left.create_line(0, y, canvas_width1, y, fill="lightgray")
 
 def draw_grid2():
-    grid_size = 20
+    grid_size = 40
     canvas_width2 = dp_game_canvas_right.winfo_width()
     canvas_height2 = dp_game_canvas_right.winfo_height()
 
@@ -136,10 +136,10 @@ def spawn_food():
     canvs_width = sp_game_canvas.winfo_width()
     canvs_height = sp_game_canvas.winfo_height()
 
-    foodx = random.randint(1, (canvs_width // 20)- 1) * 20
-    foody = random.randint(1, (canvs_height // 20)- 1) * 20
+    foodx = random.randint(1, (canvs_width // 40)) * 40
+    foody = random.randint(1, (canvs_height // 40)) * 40
 
-    food = sp_game_canvas.create_oval(foodx, foody, foodx + 20, foody + 20, fill="red")
+    food = sp_game_canvas.create_oval(foodx, foody, foodx + 40, foody + 40, fill="red")
 
 def spawn_food1():
     import random
@@ -148,10 +148,10 @@ def spawn_food1():
     canvs_width1 = dp_game_canvas_left.winfo_width()
     canvs_height1 = dp_game_canvas_left.winfo_height()
 
-    foodx = random.randint(1, (canvs_width1 // 20)- 1) * 20
-    foody = random.randint(1, (canvs_height1 // 20)- 1) * 20
+    foodx = random.randint(1, (canvs_width1 // 40)) * 40
+    foody = random.randint(1, (canvs_height1 // 40)) * 40
 
-    food1 = dp_game_canvas_left.create_oval(foodx, foody, foodx + 20, foody + 20, fill="red")
+    food1 = dp_game_canvas_left.create_oval(foodx, foody, foodx + 40, foody + 40, fill="red")
 
 def spawn_food2():
     import random
@@ -160,10 +160,10 @@ def spawn_food2():
     canvs_width2 = dp_game_canvas_right.winfo_width()
     canvs_height2 = dp_game_canvas_right.winfo_height()
 
-    foodx = random.randint(1, (canvs_width2 // 20)- 1) * 20
-    foody = random.randint(1, (canvs_height2 // 20)- 1) * 20
+    foodx = random.randint(1, (canvs_width2 // 40)) * 40
+    foody = random.randint(1, (canvs_height2 // 40)) * 40
 
-    food2 = dp_game_canvas_right.create_oval(foodx, foody, foodx + 20, foody + 20, fill="red")
+    food2 = dp_game_canvas_right.create_oval(foodx, foody, foodx + 40, foody + 40, fill="red")
 
 def snake_move():
     global snake, snake_body, direction, score_p1, food, sp_game_canvas, snake_color
@@ -173,13 +173,13 @@ def snake_move():
 
     head_x, head_y = snake[0]
     if direction == "Right":
-        head_x += 20
+        head_x += 40
     elif direction == "Left":
-        head_x -= 20
+        head_x -= 40
     elif direction == "Up":
-        head_y -= 20
+        head_y -= 40
     elif direction == "Down":
-        head_y += 20
+        head_y += 40
         
     if head_x<0 or head_x>=canvas_width or head_y<0 or head_y>=canvas_height:
         messagebox.showinfo("Game Over", f"You crashed into the wall! Your Score: {score_p1}")
@@ -202,7 +202,7 @@ def snake_move():
 
     new_head = (head_x, head_y)
     snake.insert(0, new_head)
-    new_block = sp_game_canvas.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill=snake_color)
+    new_block = sp_game_canvas.create_rectangle(head_x, head_y, head_x + 40, head_y + 40, fill=snake_color)
     snake_body.insert(0, new_block)
 
     if food is not None:
@@ -225,15 +225,18 @@ def snake_move():
 def snake_move1():
     global snake1, snake1_body, direction1, score_p1, food1, dp_game_canvas_left, snake_color
 
+    canvas_width = dp_game_canvas_left.winfo_width()
+    canvas_height = dp_game_canvas_left.winfo_height()
+
     head_x, head_y = snake1[0]
     if direction1 == "Right":
-        head_x += 20
+        head_x += 40
     elif direction1 == "Left":
-        head_x -= 20
+        head_x -= 40
     elif direction1 == "Up":
-        head_y -= 20
+        head_y -= 40
     elif direction1 == "Down":
-        head_y += 20
+        head_y += 40
         
     if head_x<0 or head_x>=canvas_width or head_y<0 or head_y>=canvas_height:
         messagebox.showinfo("Game Over", f"You crashed into the wall! Your Score: {score_p1}")
@@ -256,7 +259,7 @@ def snake_move1():
 
     new_head = (head_x, head_y)
     snake1.insert(0, new_head)
-    new_block1 = dp_game_canvas_left.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill=snake_color)
+    new_block1 = dp_game_canvas_left.create_rectangle(head_x, head_y, head_x + 40, head_y + 40, fill=snake_color)
     snake1_body.insert(0, new_block1)
 
     if food1 is not None:
@@ -277,15 +280,18 @@ def snake_move1():
 def snake_move2():
     global snake2, snake2_body, direction2, score_p2, food2, dp_game_canvas_right, snake_color
 
+    canvas_width = dp_game_canvas_right.winfo_width()
+    canvas_height = dp_game_canvas_right.winfo_height()
+
     head_x, head_y = snake2[0]
     if direction2 == "Right":
-        head_x += 20
+        head_x += 40
     elif direction2 == "Left":
-        head_x -= 20
+        head_x -= 40
     elif direction2 == "Up":
-        head_y -= 20
+        head_y -= 40
     elif direction2 == "Down":
-        head_y += 20
+        head_y += 40
         
     if head_x<0 or head_x>=canvas_width or head_y<0 or head_y>=canvas_height:
         messagebox.showinfo("Game Over", f"You crashed into the wall! Your Score: {score_p2}")
@@ -308,7 +314,7 @@ def snake_move2():
 
     new_head = (head_x, head_y)
     snake2.insert(0, new_head)
-    new_block2 = dp_game_canvas_right.create_rectangle(head_x, head_y, head_x + 20, head_y + 20, fill=snake_color)
+    new_block2 = dp_game_canvas_right.create_rectangle(head_x, head_y, head_x + 40, head_y + 40, fill=snake_color)
     snake2_body.insert(0, new_block2)
 
     if food2 is not None:
@@ -385,10 +391,10 @@ def sp():
     sp_game_canvas= Canvas(main_area, bg="green")
     sp_game_canvas.pack(fill=tk.BOTH, expand=True)
 
-    snake = [(100,100),(80,100)]
+    snake = [(40, 40), (0, 40)]
     snake_body = []
     for x, y in snake:
-        snake_body.append(sp_game_canvas.create_rectangle(x, y, x+20, y+20, fill="black"))
+        snake_body.append(sp_game_canvas.create_rectangle(x, y, x+40, y+40, fill="black"))
 
     direction = "Right"
 
@@ -416,7 +422,8 @@ def dp():
         score_counter_p2.destroy()
     except:
         pass
-    
+
+  
     dp_game_canvas_left = tk.Canvas(main_area, bg="blue")
     dp_game_canvas_left.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
@@ -426,29 +433,31 @@ def dp():
     score_counter_p2 = tk.Label(close_game, text=f"Player 2: {score_p2}", font=("Arial", 23), bg="#181818", fg='white')
     score_counter_p2.pack(side=tk.LEFT, anchor=tk.W)
 
-    snake1 = [(100, 100),  (80, 100)]
-    snake2 = [(100, 100), (80, 100)]
+    snake1 = [(40, 40), (0, 40)]
+    snake2 = [(40, 40), (0, 40)]
     snake1_body = []
     snake2_body = []
 
     for x, y in snake1:
-        snake1_body.append(dp_game_canvas_left.create_rectangle(x, y, x + 20, y + 20, fill="white"))
+        snake1_body.append(dp_game_canvas_left.create_rectangle(x, y, x + 40, y + 40, fill="white"))
 
     for x, y in snake2:
-        snake2_body.append(dp_game_canvas_right.create_rectangle(x, y, x + 20, y + 20, fill="white"))
+        snake2_body.append(dp_game_canvas_right.create_rectangle(x, y, x + 40, y + 40, fill="white"))
 
     direction1 = "Right"
     direction2 = "Right"
 
-    root.bind("<KeyPress>", handle_keypress)
+    dp_game_canvas_left.focus_set()
+    dp_game_canvas_left.bind("<KeyPress>", handle_keypress)
+    dp_game_canvas_right.focus_set()
+    dp_game_canvas_right.bind("<KeyPress>", handle_keypress)
 
     dp_game_canvas_left.after(50, draw_grid1)
     dp_game_canvas_right.after(50, draw_grid2)
     dp_game_canvas_left.after(100, spawn_food1)
     dp_game_canvas_right.after(100, spawn_food2)
-
-    snake_move1()
-    snake_move2()
+    dp_game_canvas_left.after(300, snake_move1)
+    dp_game_canvas_right.after(300, snake_move2)
 
 
 single_player = tk.Button(start_game, text="Single Player", bg="#181818", fg="#f0f0f0", relief="raised", command=sp)
