@@ -54,8 +54,18 @@ logo_label.pack()
 team_frame = tk.Frame(des_section, relief="raised")
 team_frame.pack(pady=(0, 5))
 team_frame.configure(bg="#f0f0f0")
-team_frame.pack_propagate(False)
+team_frame.pack_propagate(True)
 team_frame.configure(width=photoWidth, height=photoHeight)
+
+text = tk.Label(team_frame, text="CP Mini Project", font=("Arial", 20), bg="#f0f0f0", fg="#181818")
+text.pack(pady=(5, 5))
+text2 = tk.Label(team_frame, text="Dr.Ashish Soni", font=("Arial", 20), bg="#f0f0f0", fg="#181818")
+text2.pack(pady=(5, 5))
+text3 = tk.Label(team_frame, text="Team Members", font=("Arial", 20), bg="#f0f0f0", fg="#181818")
+text3.pack(pady=(5, 5))
+text4 = tk.Label(team_frame, text="1. Manthan \n2. Bhargav \n3. Kaushal\n4. Harsh\n5. Husain", font=("Arial", 20), bg="#f0f0f0", fg="#181818")
+text4.pack(pady=(5, 5))
+
 
 def info():
     messagebox.showinfo("Info about Game", "Single PLayer: Use Arrow keys or WASD Keys to control the snake.\nDual Player: Use W, A, S, D for Player 1(Left) and Arrow keys for Player 2(Right).\nEat the red food to grow the snake.\nAvoid colliding with the walls or yourself.\nHave fun!")
