@@ -4,6 +4,10 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from tkinter import messagebox
 import random
+pygame.mixer.init()
+
+eat_sound = pygame.mixer.Sound("./assets/eat.wav")
+end_sound = pygame.mixer.Sound("./assets/end.wav")
 
 root = tk.Tk()
 root.title("Snake Game")
@@ -143,6 +147,7 @@ def spawn_food():
     import random
     global food
 
+    sp_game_canvas.update_idletasks()
     canvs_width = sp_game_canvas.winfo_width()
     canvs_height = sp_game_canvas.winfo_height()
 
@@ -155,6 +160,7 @@ def spawn_food1():
     import random
     global food1
 
+    dp_game_canvas_left.update_idletasks()
     canvs_width1 = dp_game_canvas_left.winfo_width()
     canvs_height1 = dp_game_canvas_left.winfo_height()
 
@@ -167,6 +173,7 @@ def spawn_food2():
     import random
     global food2
 
+    dp_game_canvas_right.update_idletasks()
     canvs_width2 = dp_game_canvas_right.winfo_width()
     canvs_height2 = dp_game_canvas_right.winfo_height()
 
@@ -193,6 +200,7 @@ def snake_move():
 
 
     if head_x < 0 or head_x >= canvas_width or head_y < 0 or head_y >= canvas_height:
+        pygame.mixer.Sound.play(end_sound)
         messagebox.showinfo("Game Over", f"You crashed into the wall! Your Score: {score_p1}")
         sp_game_canvas.destroy()
         sp_game_canvas = None
@@ -204,6 +212,7 @@ def snake_move():
 
 
     if (head_x, head_y) in snake:
+        pygame.mixer.Sound.play(end_sound)
         messagebox.showinfo("Game Over", f"You bit yourself! Your Score: {score_p1}")
         sp_game_canvas.destroy()
         sp_game_canvas = None
@@ -225,6 +234,7 @@ def snake_move():
         food_x, food_y = int(coords[0]), int(coords[1])
 
         if head_x == food_x and head_y == food_y:
+            pygame.mixer.Sound.play(eat_sound)
             score_p1 += 1
             score_counter_p1.config(text=f"Player 1: {score_p1}")
             sp_game_canvas.delete(food)
@@ -256,6 +266,7 @@ def snake_move1():
 
 
     if head_x < 0 or head_x >= canvas_width or head_y < 0 or head_y >= canvas_height:
+        pygame.mixer.Sound.play(end_sound)
         messagebox.showinfo("Game Over", f"Player 1 crashed into the wall! Your Score: {score_p1}")
         dp_game_canvas_left.destroy()
         dp_game_canvas_left = None
@@ -267,6 +278,7 @@ def snake_move1():
 
 
     if (head_x, head_y) in snake1:
+        pygame.mixer.Sound.play(end_sound)
         messagebox.showinfo("Game Over", f"Player 1 bit itself! Your Score: {score_p1}")
         dp_game_canvas_left.destroy()
         dp_game_canvas_left = None
@@ -288,6 +300,7 @@ def snake_move1():
         foodx, foody = int(coords[0]), int(coords[1])
 
         if head_x == foodx and head_y == foody:
+            pygame.mixer.Sound.play(eat_sound)
             score_p1 += 1
             score_counter_p1.config(text=f"Player 1: {score_p1}")
             dp_game_canvas_left.delete(food1)
@@ -319,6 +332,7 @@ def snake_move2():
 
 
     if head_x < 0 or head_x >= canvas_width or head_y < 0 or head_y >= canvas_height:
+        pygame.mixer.Sound.play(end_sound)
         messagebox.showinfo("Game Over", f"Player 2 crashed into the wall! Your Score: {score_p2}")
         dp_game_canvas_right.destroy()
         dp_game_canvas_right = None
@@ -330,6 +344,7 @@ def snake_move2():
 
 
     if (head_x, head_y) in snake2:
+        pygame.mixer.Sound.play(end_sound)
         messagebox.showinfo("Game Over", f"Player 2 bit itself! Your Score: {score_p2}")
         dp_game_canvas_right.destroy()
         dp_game_canvas_right = None
@@ -351,6 +366,7 @@ def snake_move2():
         foodx, foody = int(coords[0]), int(coords[1])
 
         if head_x == foodx and head_y == foody:
+            pygame.mixer.Sound.play(eat_sound)
             score_p2 += 1
             score_counter_p2.config(text=f"Player 2: {score_p2}")
             dp_game_canvas_right.delete(food2)
