@@ -67,12 +67,12 @@ text2 = tk.Label(team_frame, text="Dr.Ashish Soni", font=("Arial", 20), bg="#f0f
 text2.pack(pady=(5, 5))
 text3 = tk.Label(team_frame, text="Team Members", font=("Arial", 20), bg="#f0f0f0", fg="#181818")
 text3.pack(pady=(5, 5))
-text4 = tk.Label(team_frame, text="1. Manthan \n2. Bhargav \n3. Kaushal\n4. Harsh\n5. Husain", font=("Arial", 20), bg="#f0f0f0", fg="#181818")
+text4 = tk.Label(team_frame, text="1. Manthan \n2. Bhargav \n3. Khushal\n4. Harsh\n5. Husain", font=("Arial", 20), bg="#f0f0f0", fg="#181818")
 text4.pack(pady=(5, 5))
 
 
 def info():
-    messagebox.showinfo("Info about Game", "Single PLayer: Use Arrow keys or WASD Keys to control the snake.\nDual Player: Use W, A, S, D for Player 1(Left) and Arrow keys for Player 2(Right).\nEat the red food to grow the snake.\nAvoid colliding with the walls or yourself.\nHave fun!")
+    messagebox.showinfo("Info about Game", "Single Player: Use Arrow keys or WASD Keys to control the snake.\nDual Player: Use W, A, S, D for Player 1(Left) and Arrow keys for Player 2(Right).\nEat the red food to grow the snake.\nAvoid colliding with the walls or yourself.\nHave fun!")
 
 infoButton = tk.Button(des_section, text="Info", bg="#181818", fg="#f0f0f0", relief="raised", command=info)
 infoButton.pack(pady=(5, 5), padx=(5, 5), side=tk.BOTTOM)
