@@ -151,8 +151,8 @@ def spawn_food():
     canvs_width = sp_game_canvas.winfo_width()
     canvs_height = sp_game_canvas.winfo_height()
 
-    foodx = random.randint(1, (canvs_width // 40)) * 40
-    foody = random.randint(1, (canvs_height // 40)) * 40
+    foodx = random.randint(1, (canvs_width // 40)-1) * 40
+    foody = random.randint(1, (canvs_height // 40)-1) * 40
 
     food = sp_game_canvas.create_oval(foodx, foody, foodx + 40, foody + 40, fill="red")
 
@@ -164,8 +164,8 @@ def spawn_food1():
     canvs_width1 = dp_game_canvas_left.winfo_width()
     canvs_height1 = dp_game_canvas_left.winfo_height()
 
-    foodx = random.randint(1, (canvs_width1 // 40)) * 40
-    foody = random.randint(1, (canvs_height1 // 40)) * 40
+    foodx = random.randint(1, (canvs_width1 // 40)-1) * 40
+    foody = random.randint(1, (canvs_height1 // 40)-1) * 40
 
     food1 = dp_game_canvas_left.create_oval(foodx, foody, foodx + 40, foody + 40, fill="red")
 
@@ -177,8 +177,8 @@ def spawn_food2():
     canvs_width2 = dp_game_canvas_right.winfo_width()
     canvs_height2 = dp_game_canvas_right.winfo_height()
 
-    foodx = random.randint(1, (canvs_width2 // 40)) * 40
-    foody = random.randint(1, (canvs_height2 // 40)) * 40
+    foodx = random.randint(1, (canvs_width2 // 40)-1) * 40
+    foody = random.randint(1, (canvs_height2 // 40)-1) * 40
 
     food2 = dp_game_canvas_right.create_oval(foodx, foody, foodx + 40, foody + 40, fill="red")
 
